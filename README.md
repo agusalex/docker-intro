@@ -53,7 +53,7 @@ Docker hello world
 
     docker run busybox echo 'Hello World'
 
-What has happened?
+Que paso?
 
 * Descarga `busybox` que contiene un par de utilidades practicas de Linux
 * Crea un nuevo container
@@ -78,7 +78,7 @@ Docker Container
 * Persiste cambios dentro de su filesystem
 
 
-Commands for image handling
+Comandos para el manejo de imagenes
 ==============================
 
 search, pull & push
@@ -117,7 +117,7 @@ borrar una imagen:
 Docker run
 ===============
 
-Start a new container
+Arrancar un nuevo container
 
     docker run <nombredeimagen>
 
@@ -135,7 +135,7 @@ Opciones:
      -i, --interactive=false   Keep STDIN open even if not attached
      -t, --tty=false    Allocate a pseudo-TTY
 
-Some option details
+Detalles
 ====================
 
 * Publicar el puerto 80 del container como el 8080 en el host: `-p 8080:80`
@@ -143,7 +143,7 @@ Some option details
   en el container: `-v /html:/usr/share/nginx/html`
   * Con “Mount” nos referimos a hacerlo disponible.
   * `/usr/share/nginx/html` Aca es donde NGINX espera los archivos HTML.
-Exercise:
+Ejercicio:
 ----------
 1. Arrancar un servidor Nginx en el puerto 8080 del host,
    con el archivo `index.html` por defecto.
@@ -232,7 +232,7 @@ La manera estandard de crear imagenes es atravez de un `Dockerfile`
         docker build -t my-nginx .
 
 
-Note:
+Nota:
 ---------------------
 - El build va a tener el directorio actual como contexto
 - Todas las rutas van a ser relativa al Dockerfile
@@ -308,7 +308,7 @@ ENTRYPOINT
 
     ENTRYPOINT ["executable", "param1", "param2"]
 
-Example:
+Ejemplo:
 
     ENTRYPOINT ["top", "-b"]
     CMD ["-c"]
@@ -326,7 +326,7 @@ filesystem y produciendo una nueva capa.
 
 Para reducir cantidad de layers conviene agrupar comandos
 
-Example:
+Ejemplo:
 
     RUN apt-get update && \
         apt-get install -y ca-certificates nginx=${NGINX_VERSION} && \
