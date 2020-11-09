@@ -139,7 +139,6 @@ Some option details
   en el container: `-v /html:/usr/share/nginx/html`
   * Con “Mount” nos referimos a hacerlo disponible.
   * `/usr/share/nginx/html` Aca es donde NGINX espera los archivos HTML.
-
 Exercise:
 ----------
 1. Arrancar un servidor Nginx en el puerto 8080 del host,
@@ -165,7 +164,7 @@ Todos los containers:
 Ciclo de vida de un container
 =========================
 
-STOP:
+Stop:
 
     docker stop <container..>
 
@@ -205,7 +204,7 @@ copy archivos desde y hacia el container, e.g.
 
     docker cp my_webserver:/etc/nginx/nginx.conf ~/
 
-Interaction and debugging
+Ejercicio
 ==========================
 
 Ejercicio
@@ -215,7 +214,7 @@ Ejercicio
 3. Ver los logs del webserver
 
 
-Modify a container
+Modificar un Container
 ==========================
 
 Exercise
@@ -228,29 +227,6 @@ Exercise
 1. Push your new image to your private registry
 1. Delete the image locally
 1. Start the image again (now coming from the registry)
-
-Useful tricks: Cleanup Script
-=======================================
-You have to cleanup your local images and old containers regularly.
-
-    docker rm $(docker ps -q -a -f status=exited)
-    docker rmi $(docker images -q -f dangling=true)
-
-
-Especially on test and build systems this should be part of a cron job.
-
-
-    exited=$(docker ps -q -a -f status=exited | wc -l)
-
-    if [ "$exited" != "0" ]; then
-            docker rm $(docker ps -q -a -f status=exited)
-    fi
-
-    tagref=$(docker images -q -f dangling=true | wc -l)
-
-    if [ "$tagref" != "0" ]; then0
-            docker rmi $(docker images -q -f dangling=true)
-    fi
 
 Part 3
 =========================
@@ -269,7 +245,7 @@ The normal way to create images is through `Dockerfile` build descriptions.
 
 2. build the image and give it a name
 
-        docker build --pull -t my-nginx .
+        docker build -t my-nginx .
 
 
 Note:
