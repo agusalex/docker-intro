@@ -1,9 +1,15 @@
+Docker Intro
+===============
+
+Intro a Docker
+
+Slides: <https://agusalex.github.io/docker-intro>
 
 Docker
 ===============
 1. __Intro__
 1. __CLI__
-1. __Buildear __
+1. __Buildear__
 1. __Multiple Containers__
 1. __Docker Swarm__
 
