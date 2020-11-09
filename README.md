@@ -374,3 +374,10 @@ Leer mas
 [docker-compose](https://docs.docker.com/compose/)
 
 [Swarm](https://docs.docker.com/engine/swarm/)
+
+Creditos
+===============
+Sebastian Mancke
+-----------
+Creative Commons BY-SA 3.0
+===============
