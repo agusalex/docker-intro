@@ -282,6 +282,7 @@ Ejercicio
 ----------
 
 Recrear el webserver esta vez usando `docker build`
+Hacerlo usando un Dockerfile
 
 Dockerfile
 =====================
