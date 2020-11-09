@@ -1,18 +1,9 @@
 
-Docker Intro
+Docker
 ===============
-
-This is an Docker introduction slide deck:
-
-Slides: <https://smancke.github.io/docker-intro>
-
-Source <https://github.com/smancke/docker-intro>
-
-Contents:
-----------
 1. __Intro__
-1. __Command line interface__
-1. __Build Docker Images__
+1. __CLI__
+1. __Buildear __
 1. __Multiple Containers__
 1. __Docker Swarm__
 
@@ -21,90 +12,66 @@ Part 1
 
 ## Intro
 
-What is Docker
+Que es Docker
 ================
 
-Key concepts
+Conceptos claves
 ----------------
-* Defined environment for launching processes
-* Clean separation of environments
-* Sandbox with defined resources
-* One simple interface for launching applications
+* Entorno definido para la ejecucion de procesos
+* Aislamientos entre entornos
+* Es un sandbox con recursos definidos
+* Permite una interfaz sencilla para lanzar procesos
+* Utiliza un sistema de filesystem en capas (Layers) entonces los containers que comparten layers no ocupan mas espacio hasta que modifico esa layer.
 
-What is Docker not!
+Que NO es docker
 --------------------
-* Not a virtualisation
-* No separate kernel
-* No hypervisor
+* No es virtualizacion
+* No usa un kernel aparte
+* No es un hypervisor
 
 Installation
 ===============
-Docker is linux based, but there exist convenient solutions to work on Windows and Mac OS X also.
+Docker esta basado en linux pero se puede instalar en Windows y Mac OS X
 
-Detailed Instructions: <https://docs.docker.com/installation/>
+Instrucciones: <https://docs.docker.com/installation/>
 
-The simple way for installation in Ubuntu and Debian:
+Para Ubuntu/Debian :
 
     curl https://get.docker.com/ | sh
-
-docker-machine
-===================
-Simple wrapper over virtualbox (or other backends) to create and manage a Docker host.
-
-    # create a new machine
-    docker-machine create --driver=virtualbox dev
-
-    # start an existing machine
-    docker-machine start dev
-
-    # upgrade the vm image of machine `dev`
-    # must be running
-    docker-machine upgrade dev
-
-    # list available machines
-    docker-machine ls
-
-    # activate enviroment variable to machine `dev`
-    eval $(docker-machine env dev)
-
-    # ssh into machine `dev`
-    docker-machine ssh dev
 
 Part 2
 =========================
 
-## Command line interface
+## CLI o Command line interface
 
-The Docker hello world
+Docker hello world
 =========================
 
     docker run busybox echo 'Hello World'
 
 What has happened?
 
-* Download the image `busybox`
-* Create a new container
-* Execute the `echo` command within the new container
+* Descarga `busybox` que contiene un par de utilidades practicas de Linux
+* Crea un nuevo container
+* Ejecuta el comando `echo` dentro del nuevo container
 
-Images and Containers
+Imagenes y Containers
 ==========================
 
 Docker Image
 ---------------
 
-* An immutable template for containers
-* Can be pulled and pushed towards a registry
-* Image names have the form `[registry/][user/]name[:tag]`
-* The default for the tag is `latest`
+* Es una plantilla inmutable para los containers
+* Puede hacerse push y pull de un registry
+* Las imagenes tienen la siguiente sintaxis `[registry/][user/]name[:tag]`
+* El tag por defecto es `latest`
 
 Docker Container
 ---------------
 
-* An instance of an image
-* Can be started, stopped, restarted, …
-* Maintains changes within the filesystems
-* New image can be created from current container state (not
-  recommended, use Dockerfile instead)
+* Es una instancia de una imagen (plantilla)
+* Puedo arrancarla detenerla o reiniciarla (start stop restart)
+* Persiste cambios dentro de su filesystem
 
 
 Commands for image handling
@@ -113,33 +80,33 @@ Commands for image handling
 search, pull & push
 ----------------------
 
-searching in the registry:
+Buscar en el registry:
 
     docker search <term>
 
-download or update an image from the registry:
+Descargar del registry:
 
     docker pull <image>
 
-upload an image to the registry:
+Subir al registry:
 
     docker push <image>
 
-Commands for image handling
+Comandos para el manejo de imagenes
 ==============================
 
 list, tag & delete
 ----------------------
 
-listing of downloaded images:
+Listar imagenes disponibles:
 
     docker images
 
-give an image a new name (alias):
+Darle un nombre a una imagen (alias):
 
     docker tag <oldname> <newname>
 
-delete an image locally:
+borrar una imagen:
 
     docker rmi <image>
 
@@ -148,9 +115,9 @@ Docker run
 
 Start a new container
 
-    docker run <imagename>
+    docker run <nombredeimagen>
 
-My favorite run options:
+Opciones:
 
     Usage: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
      --name             Give the container a symbolic name
@@ -167,131 +134,85 @@ My favorite run options:
 Some option details
 ====================
 
-* Publish port 80 from container as port 8080 on host: `-p 8080:80`
-* Mount local directory `/html` as directory `/usr/share/nginx/html`
-  in the container: `-v /html:/usr/share/nginx/html`
-  * “Mount” just means “make available”.
-  * `/usr/share/nginx/html` is where nginx expects HTML files.
+* Publicar el puerto 80 del container como el 8080 en el host: `-p 8080:80`
+* Montar un directorio local `/html` como el directorio `/usr/share/nginx/html`
+  en el container: `-v /html:/usr/share/nginx/html`
+  * Con “Mount” nos referimos a hacerlo disponible.
+  * `/usr/share/nginx/html` Aca es donde NGINX espera los archivos HTML.
 
 Exercise:
 ----------
-1. Start an nginx web server, accessible on port 8080 on the host,
-   with its default `index.html` file.
-   * Direct your browser to `http://localhost:8080/` to verify that it works.
-1. Start an nginx web server, accessible on port 80 on the host, with
-   a custom `index.html` file.
-   * Direct your browser to `http://localhost/` to verify that it works.
+1. Arrancar un servidor Nginx en el puerto 8080 del host,
+   con el archivo `index.html` por defecto.
+   * Ir a `http://localhost:8080/` ver que ande.
+1. Arrancar un servidor Nginx en el puerto 8080 del host con un archivo
+  `index.html` personalizado.
+   * Ir a `http://localhost:8080/` ver que ande.
 
-See your containers:
+Ver los containers:
 ========================
 
-List containers
+Listar containers
 -----------------
-The running containers:
+Containers ejecutandose:
 
     docker ps
 
-All containers:
+Todos los containers:
 
     docker ps -a
 
-Show Metadata of a container
------------------------------
-
-    docker inspect <container>
-
-Output a special field of the metadata:
-
-    docker inspect --format='{{.Image}}' <container>
-
-
-Container Livecycle
+Ciclo de vida de un container
 =========================
 
-Stop running containers:
+STOP:
 
     docker stop <container..>
 
-Start stopped containers:
+Start:
 
     docker start <container..>
 
-Kill running containers:
+Kill:
 
     docker kill <container..>
 
-Remove containers:
+Remove:
 
     docker rm <container..>
 
 
-Useful tricks: Container Id
-==============================
-
-give your containers a name
-
-    docker run --name my_webserver nginx
-    docker rm -f my_webserver
-
-save the container id in shell variables
-
-    c=$(docker run -d nginx)
-    docker rm -f $c
-
-start containers in foreground and with `--rm`, when playing around:
-
-    docker run --rm nginx
-
-
-Interaction and debugging
+Debugging
 ==========================
 
 exec
 -----
 
-Run a command in an existing container, e.g start a shell
+Ejecuta un comando dentro de la consola del container (sh o bash)
 
     docker exec <container> <command>
     docker exec -it <container> bash
 
 logs
 --------
-See the logs (stdout) of the container.
+Ver los logs (stdout) del container container.
 
     docker logs -f <container>
 
 copy
 -------
-copy files from and to Docker container, e.g.
+copy archivos desde y hacia el container, e.g.
 
     docker cp my_webserver:/etc/nginx/nginx.conf ~/
 
 Interaction and debugging
 ==========================
 
-Exercise
+Ejercicio
 ----------
-1. Start a webserver
-2. Overwrite the content of the index.html
-3. Watch the webserver logs
-4. compare the output of `ps aux` from your container with the host
-
-
-Modify a container
-===================
-
-Inspect changes on a container's filesystem
-
-    docker diff <container>
-
-Create a new image from a container's changes:
-
-    docker commit <container> <imagename>
-
-Note:
--------
-
-- Docker uses layered filesystems, so images and containers only need to store the diff to the their base image
+1. Arrancar un webserver
+2. Reemplazar el archivo index.html
+3. Ver los logs del webserver
 
 
 Modify a container
