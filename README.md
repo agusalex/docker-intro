@@ -3,7 +3,7 @@ Docker Intro
 
 Intro a Docker
 
-Slides: <https://agusalex.github.io/docker-intro>
+Slides: <https://agusalex.github.io/docker-intro-spanish>
 
 Docker
 ===============
