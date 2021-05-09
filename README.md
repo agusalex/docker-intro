@@ -143,14 +143,6 @@ Detalles
   en el container: `-v /html:/usr/share/nginx/html`
   * Con “Mount” nos referimos a hacerlo disponible.
   * `/usr/share/nginx/html` Aca es donde NGINX espera los archivos HTML.
-Ejercicio:
-----------
-1. Arrancar un servidor Nginx en el puerto 8080 del host,
-   con el archivo `index.html` por defecto.
-   * Ir a `http://localhost:8080/` ver que ande.
-1. Arrancar un servidor Nginx en el puerto 8080 del host con un archivo
-  `index.html` personalizado.
-   * Ir a `http://localhost:8080/` ver que ande.
 
 Ver los containers:
 ========================
@@ -213,10 +205,12 @@ Ejercicio
 
 Ejercicio
 ----------
-1. Arrancar un webserver
-2. Reemplazar el archivo index.html
-3. Ver los logs del webserver
-
+1. Arrancar un servidor Nginx en el puerto 8080 del host,
+   con el archivo `index.html` por defecto.
+   * Ir a `http://localhost:8080/` ver que ande.
+2. Reemplazar el archivo index.html con uno personalizado.
+   * Ir a `http://localhost:8080/` ver si cambio
+4. Ver los logs del webserver
 
 Build Dockerfiles
 ==========================
